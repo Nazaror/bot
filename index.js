@@ -1,4 +1,4 @@
-const {Telegraf, session, Markup, Scenes: { WizardScene, Stage } } = require('telegraf');
+const {Telegraf, session, Markup, Scenes: {WizardScene, Stage}} = require('telegraf');
 require('dotenv').config();
 const helps = require('./variables');
 const count = require('./counter');
@@ -47,6 +47,7 @@ bot.command('chose', async (ctx) => {
             await ctx.reply('Спочатку додайте потенційних жертв')
             return
         }
+        // await isAdmin(ctx);
         randomizer.random.setCandidates()
         await ctx.reply('Початок вибору жертви на наступний місяць.')
         await ctx.reply(`Жертва попереднього місяця - ${randomizer.random.currentVictim
@@ -124,9 +125,11 @@ async function isAdmin(ctx) {
     }
     let access = undefined
     if (admin) {
-         access = admin.find(user => user.id === ctx.from.id)
+        access = admin.find((user) => {
+            return user?.user?.id === ctx.from.id
+        })
     }
-    if (access) {
+    if (!access) {
         await ctx.reply("Недостатньо прав :( ")
         throw new Error('Access error')
     }
