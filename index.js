@@ -126,9 +126,10 @@ async function isAdmin(ctx) {
     let access = undefined
     if (admin) {
         access = admin.find((user) => {
-            return user?.user?.id === ctx.from.id
+            return user?.user?.id === ctx.from.id && user?.user?. username === 'Nazaror';
         })
     }
+    console.log(access)
     if (!access) {
         await ctx.reply("Недостатньо прав :( ")
         throw new Error('Access error')
