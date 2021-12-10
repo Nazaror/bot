@@ -41,7 +41,7 @@ bot.command('time', async (ctx) => {
     }
 })
 
-bot.command('chose-victim', async (ctx) => {
+bot.command('chose', async (ctx) => {
     try {
         if (randomizer.random.victims.length < 2) {
             await ctx.reply('Спочатку додайте потенційних жертв')
@@ -66,7 +66,7 @@ bot.command('chose-victim', async (ctx) => {
 
 });
 
-bot.command('add-victims', async (ctx) => {
+bot.command('add', async (ctx) => {
     try {
         await isAdmin(ctx);
         await ctx.scene.enter('victimsScene')
@@ -76,7 +76,7 @@ bot.command('add-victims', async (ctx) => {
 
 });
 
-bot.command('set-current', async (ctx) => {
+bot.command('set', async (ctx) => {
     try {
         await isAdmin(ctx);
         await ctx.scene.enter('victimScene')
@@ -97,7 +97,7 @@ bot.command('current', async (ctx) => {
 
 });
 
-bot.command('clear-current', async (ctx) => {
+bot.command('clear', async (ctx) => {
     try {
         await isAdmin(ctx);
         randomizer.random.currentVictim = '';
